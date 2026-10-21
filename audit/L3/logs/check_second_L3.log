@@ -1,0 +1,9 @@
+lower/cert_arllo_L3_5295faaa.json: tpmahler-areal-lower-v1, 34 polynomials (34 weighted), 4660 nodes on [0.0, 24.0], s = 0.09557589095460681
+moments exact: True; data errors: none
+budget sum c deg + 2s = 0.903938467019 < 1: True; kappa = 0.0960615330
+energy I = [1.09650468663e-10 +/- 2.26e-22]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.53243 +/- 1.58e-6]: True
+right tail [4357, inf): F >= [0.192145 +/- 4.03e-7] (increasing): True
+F >= 0 on the main range [0.001, 4357.0]: 39833 interval tests, coverage exact: True, failures: 0, brackets 230, smallest certified lower bound 3.4862e-08 near 2.11625  [578s]
+VERIFIED: log lambda_A+ >= m = 45636208945290293391/140737488355328000000 = [0.324264767537061 +/- 2.14e-16]; lambda_A+ >= e^m = [1.38301343570895 +/- 3.47e-15]
+[612s]

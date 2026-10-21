@@ -1,0 +1,1 @@
+notch at x0 = 3.162500333 (G = 0.007732), flat half-width 1.0e-04, ramps 5.0e-05, height 0.0005681, mass 1.4202e-07: F_new(x0) = [-4.6649e-8 +/- 2.17e-13] < 0; min over 6 check points = [5.9301e-8 +/- 2.28e-13] at 3.1626003 > 0; I/s change -2.22e-07; file ../regen/lower_hidden/notch_B_logside_x3.1625.json

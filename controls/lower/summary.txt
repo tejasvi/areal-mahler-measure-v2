@@ -1,0 +1,17 @@
+neg_G_N_nonzero.json exit=1 : NOT VERIFIED
+neg_coeff_x2m3xp1_to_x2m3xp2.json exit=1 : NOT VERIFIED
+neg_budget_violation.json exit=1 : NOT VERIFIED
+neg_G_times_0.99.json exit=1 : NOT VERIFIED
+neg_m_plus_1e-5.json exit=1 : NOT VERIFIED
+neg_G_times_1.01.json exit=1 : NOT VERIFIED
+neg_drop_heaviest.json exit=1 : NOT VERIFIED
+neg_negative_G.json exit=1 : NOT VERIFIED
+neg_nodes_swapped.json exit=1 : NOT VERIFIED
+neg_drop_second_heaviest.json exit=1 : NOT VERIFIED
+neg_drop_x_minus_1.json exit=1 : NOT VERIFIED
+neg_cx_times_1.001.json exit=1 : NOT VERIFIED
+neg_x_lo_inside_support.json exit=1 : NOT VERIFIED
+neg_m_plus_2e-6.json exit=0 : VERIFIED: log lambda_A+ >= m = 45636490420267004047/140737488355328000000; N0 >= e^m >= 1.3830162 (also E_A+)  (3487s)
+neg_m_plus_4e-6.json exit=1 : NOT VERIFIED (252 failed; 3579s)
+neg_NARROWNOTCH.json exit=1 : NOT VERIFIED (1 failed; 5193s)
+ALLDONE

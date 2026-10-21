@@ -1,0 +1,16 @@
+# Commands that produced the logs in this directory. Working directory: a directory containing the L3 certificate release's
+#   lower/cert_arllo_L3_5295faaa.json and lower/negative_controls/*.json (16), with this release directory at
+#   P=../release_arl_audit_L3 and a scratch directory G=../regen. PY = "python3 -I" (Python 3.13.5, python-flint 0.9.0).
+P=../release_arl_audit_L3; L=$P/logs; G=../regen; L3=lower/cert_arllo_L3_5295faaa.json
+$PY $P/check_arl_second.py $L3 48 > $L/check_second_L3.log
+for f in lower/negative_controls/*.json; do $PY $P/check_arl_second.py $f 12 > $L/controls_L3/$(basename $f .json).log; done
+for f in $P/controls/lower_hidden/*.json; do $PY $P/check_arl_second.py $f 12 > $L/controls_L3/own_$(basename $f .json).log; done
+# (the 18 control runs above ran 4 at a time; exit statuses in exit_codes.txt and controls_L3/exit_codes.txt)
+$PY $P/validate_arl.py $L3 300 1 > $L/validate_arl_L3.log
+$PY $P/scan_contacts.py $L3 > $L/scan_contacts_L3.log
+$PY $P/make_hidden_notch.py $L3 2064616 3000000 1 1000000 1 2000000 $G/lower_hidden/L3_notch_A_x0.6882.json grid > $L/make_hidden_notch_A.log
+$PY $P/make_hidden_notch.py $L3 10450051 3000000 1 20000 1 40000 $G/lower_hidden/L3_notch_B_x3.4834.json > $L/make_hidden_notch_B.log
+(cd $P/controls && for f in */*.json; do cmp -s $f ../../regen/$f && echo "$f identical" || echo "$f DIFFERS"; done) > $L/regen_cmp.txt
+# first checker (first_checker/), python-flint 0.9.0, Python 3.13.5; the output of the bash builtin `time` ends each log:
+#   python3 -I check_arl_lo_59a1c54c.py lower/cert_arllo_L3_5295faaa.json 24   (check_first_L3.log)
+#   python3 -I check_arl_lo_59a1c54c.py FILE 12                                  (the two hidden notches)

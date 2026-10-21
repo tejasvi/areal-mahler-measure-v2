@@ -1,0 +1,29 @@
+lower/negative_controls/neg_drop_second_heaviest.json: tpmahler-areal-lower-v1, 28 polynomials (27 weighted), 2001 nodes on [0.0, 20.0], s = 0.08173035848696966
+moments exact: True; data errors: none
+budget sum c deg + 2s = 0.844965702558 < 1: True; kappa = 0.1550342974
+energy I = [5.50777014626e-11 +/- 4.74e-23]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.54691 +/- 2.75e-6]: True
+right tail [4897, inf): F >= [0.729926 +/- 3.29e-7] (increasing): True
+F >= 0 on the main range [0.001, 4897.0]: 8103 interval tests, coverage exact: True, failures: 391, brackets 187, smallest certified lower bound -8.2271e-02 near 0.3949790662108718  [152s]
+   FAILED near (0.135, 'value [-0.0011156 +/- 2.95e-8] < 0')
+   FAILED near (0.145, 'value [-0.010478 +/- 4.57e-7] < 0')
+   FAILED near (0.155, 'value [-0.015396 +/- 4.40e-7] < 0')
+   FAILED near (0.16488856724795142, 'value [-0.017534 +/- 4.65e-7] < 0')
+   FAILED near (0.16977713449590282, 'bracket of Q_[21]')
+   FAILED near (0.1698885672479514, 'value [-0.018073 +/- 4.06e-7] < 0')
+   FAILED near (0.1709365552454823, 'value [-0.018456 +/- 3.61e-7] < 0')
+   FAILED near (0.1718731104909646, 'bracket of Q_[16]')
+   FAILED near (0.17333973021489238, 'value [-0.018708 +/- 4.66e-7] < 0')
+   FAILED near (0.1770928423616921, 'value [-0.019557 +/- 7.47e-8] < 0')
+   FAILED near (0.17937933478456405, 'bracket of Q_[27]')
+   FAILED near (0.179689667392282, 'value [-0.020210 +/- 1.30e-7] < 0')
+   FAILED near (0.18280645855371686, 'value [-0.020802 +/- 2.27e-7] < 0')
+   FAILED near (0.18561291710743372, 'bracket of Q_[25]')
+   FAILED near (0.18755556037577745, 'value [-0.021514 +/- 7.08e-8] < 0')
+   FAILED near (0.18949820364412118, 'bracket of Q_[24]')
+   FAILED near (0.1897491018220606, 'value [-0.021794 +/- 3.97e-7] < 0')
+   FAILED near (0.1908048280520044, 'value [-0.021886 +/- 2.35e-7] < 0')
+   FAILED near (0.19160965610400882, 'bracket of Q_[26]')
+   FAILED near (0.19368275191480708, 'value [-0.022075 +/- 2.42e-7] < 0')
+NOT VERIFIED
+[167s]

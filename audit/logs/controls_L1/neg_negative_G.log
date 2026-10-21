@@ -1,0 +1,9 @@
+lower/negative_controls/neg_negative_G.json: tpmahler-areal-lower-v1, 28 polynomials (28 weighted), 2001 nodes on [0.0, 20.0], s = 0.08173035845166317
+moments exact: True; data errors: ['G']
+budget sum c deg + 2s = 0.902471165745 < 1: True; kappa = 0.0975288343
+energy I = [5.71862290645e-11 +/- 8.70e-24]
+left tail (0, 1/1000] (support of G starts at 0.14): F >= [1.54691 +/- 2.76e-6]: True
+right tail [4897, inf): F >= [0.195062 +/- 4.37e-7] (increasing): True
+F >= 0 on the main range [0.001, 4897.0]: 10220 interval tests, coverage exact: True, failures: 0, brackets 189, smallest certified lower bound 7.4612e-08 near 0.25252562481090024  [188s]
+NOT VERIFIED
+[204s]

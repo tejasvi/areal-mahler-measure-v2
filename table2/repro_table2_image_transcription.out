@@ -1,0 +1,6 @@
+input flammang2015_table2_image_transcription.json sha256 8720412f2490f31ea42ad053d47253d1c36472093efb9e93f03d2d4e616c3e66, 58 rows
+grid 381887 points on [1.0e-06, 69.9998]
+printed weights: min f = 0.3221095 at x = 0.25520  (N0 >= 1.3800359; her constant 1.380047 -> log 0.3221176); sum c deg = 0.895293
+re-optimized LP over the transcribed set: m = 0.3221197 (N0 >= 1.3800500), 40 rounds, sum c deg = 0.8952, weight on the last row: 2.608e-05
+  last round: min F on the whole grid = -5.151e-08 (round cap reached); value valid on the whole grid with the last weights: 0.3221197 (N0 >= 1.3800499)
+exit=0

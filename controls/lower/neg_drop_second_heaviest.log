@@ -1,0 +1,6 @@
+polys 34 (active 33), nodes 4660, s = 0.09557589, m = 0.3242647675
+budget sum c deg + 2 s = 0.847719 < 1  OK;  I = [1.09650468663225691450193788089374782506e-10 +/- 6.87e-49]
+left tail (0, x_lo]: True 1.532431750913681
+right tail [x_hi, inf): True 0.7084787182982105 kappa 0.1522809158835405
+CheckError: root window failed near 0.1718731104909646
+NOT VERIFIED

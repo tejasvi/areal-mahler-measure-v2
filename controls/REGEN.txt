@@ -1,0 +1,106 @@
+Records of the control regeneration at freeze time, redacted: the server's name, the working directory and the interpreter
+path were replaced by <server> (the server that ran the search), <working directory> and <python> (Python 3.12.13); the
+quoted records are otherwise verbatim, and [...] marks omitted lines or words. Names are those of the working directory at
+the time:
+  make_*.py                       = make_*_<sha8>.py in controls/lower/ and controls/upper/
+  ctrl_L3/, ctrl_U2/              = controls/lower/, controls/upper/
+  negative_controls/              = the frozen package's upper/negative_controls/ = controls/upper/
+  cert_arllo_L3.json              = certificate/lower/cert_arllo_L3_5295faaa.json
+  cert_arlup_U2.json              = certificate/upper/cert_arlup_U2_cb2c7960.json
+  arl_nodes.py, export_arl_lo.py  = search/arl_nodes.py, search/export_arl_lo.py
+  primal_L1_arldualN_A58.npy, nodes_L3.npy, primal_L3.npy, primal_L3_arldualN_A58v.npy = search/lp/NAME_<sha8>.npy
+freeze_checks_L3/ and freeze_checks/ (the regenerated copies) are not included. The two make_dip_*.py files in controls/ and
+the two search programs are copies whose absolute paths were changed to paths relative to the file (so their shas differ
+from the frozen ones). Run from this release, all generators reproduce all 34 control certificates (16 lower, 18 upper)
+byte for byte, and arl_nodes.py and export_arl_lo.py reproduce nodes_L3.npy and the L3 certificate byte for byte.
+
+Lower controls (controls/lower/, certificate cert_arllo_L3.json): freeze_checks_L3.sh below (<server>, 2026-10-21, started
+04:33 PDT, record written 04:37 PDT) regenerated every control JSON from the frozen certificate with the frozen generators
+(whose shas are the ones in the names make_*_<sha8>.py) and compared byte for byte (SAME = byte-identical); it also
+reproduced nodes_L3.npy and the certificate byte for byte.
+
+== freeze_checks_L3/regen_cmp.txt (verbatim)
+SAME neg_G_N_nonzero.json
+SAME neg_G_times_0.99.json
+SAME neg_G_times_1.01.json
+SAME neg_NARROWNOTCH.json
+SAME neg_budget_violation.json
+SAME neg_coeff_x2m3xp1_to_x2m3xp2.json
+SAME neg_cx_times_1.001.json
+SAME neg_drop_heaviest.json
+SAME neg_drop_second_heaviest.json
+SAME neg_drop_x_minus_1.json
+SAME neg_m_plus_1e-5.json
+SAME neg_m_plus_2e-6.json
+SAME neg_m_plus_4e-6.json
+SAME neg_negative_G.json
+SAME neg_nodes_swapped.json
+SAME neg_x_lo_inside_support.json
+ctrl_L3 json count: 16, regenerated: 16
+1bf4059d59482e9a7682f0ee641bdd4df2bc5dc9d0684f307d88e5ffbe7c8eb0  freeze_checks_L3/neg/neg_NARROWNOTCH.json
+1bf4059d59482e9a7682f0ee641bdd4df2bc5dc9d0684f307d88e5ffbe7c8eb0  ctrl_L3/neg_NARROWNOTCH.json
+189 weighted roots, 4660 nodes on [0, 24.0]; min gap 2.00e-04
+nodes_L3.npy: BYTE-IDENTICAL
+polys 34, nodes 4660, s = 0.095576 (lam 0.095576), budget sum c deg + 2s = 0.9039, kappa 0.0961, beta 0.6128, x_lo 1/1000, x_hi 4357, m_cert 0.3242647675 (Omega 1.3830134)
+cert_arllo_L3.json: BYTE-IDENTICAL
+FREEZECHECKSDONE
+
+== freeze_checks_L3.sh (verbatim)
+#!/bin/bash
+# Pre-freeze checks for L3 on <server>: regenerate every L3 control and compare bytes; reproduce nodes_L3.npy and the certificate.
+cd <working directory>
+PY=<python>
+R=freeze_checks_L3; mkdir -p $R/neg
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+nice -n 10 $PY -I -B make_neg_arl.py cert_arllo_L3.json $R/neg > $R/neg/gen.log 2>&1
+nice -n 10 $PY -I -B make_neg2_arl.py cert_arllo_L3.json $R/neg >> $R/neg/gen.log 2>&1
+nice -n 10 $PY -I -B make_dip_arl_lo.py cert_arllo_L3.json $R/neg/neg_NARROWNOTCH.json 6129/25000 1/1000000 > $R/neg/notch_gen.log 2>&1
+{ for f in $R/neg/*.json; do cmp -s $f ctrl_L3/$(basename $f) && echo "SAME $(basename $f)" || echo "DIFF $(basename $f)"; done
+  echo "ctrl_L3 json count: $(ls ctrl_L3/*.json | wc -l), regenerated: $(ls $R/neg/*.json | wc -l)"
+  sha256sum $R/neg/neg_NARROWNOTCH.json ctrl_L3/neg_NARROWNOTCH.json
+  nice -n 10 $PY -I -B arl_nodes.py A58 primal_L1_arldualN_A58.npy 24 0.01 0.0005 0.004 $R/nodes_L3_repro.npy
+  cmp $R/nodes_L3_repro.npy nodes_L3.npy && echo "nodes_L3.npy: BYTE-IDENTICAL"
+  nice -n 10 $PY -I -B export_arl_lo.py primal_L3.npy primal_L3_arldualN_A58v.npy A58v 3e-6 $R/cert_arllo_L3_repro.json
+  cmp $R/cert_arllo_L3_repro.json cert_arllo_L3.json && echo "cert_arllo_L3.json: BYTE-IDENTICAL"
+  echo FREEZECHECKSDONE; } > $R/regen_cmp.txt 2>&1
+
+Upper controls (controls/upper/, certificate cert_arlup_U2.json): from the record of freeze_checks.sh (<server>, 2026-10-21
+~03:30 PDT), which regenerated every upper control JSON from the frozen certificate with the frozen generators (whose shas
+are the ones in the names make_*_<sha8>.py) and compared byte for byte (SAME = byte-identical). From that record:
+"DIFF-LOG lines are expected: the generator logs print their output paths [...], so logs written to freeze_checks/ differ
+from the logs in negative_controls/."
+
+== freeze_checks/regen_cmp.txt (verbatim, the lines for the upper controls)
+SAME U2 neg_MUSTFAIL_G_N_nonzero.json
+SAME U2 neg_MUSTFAIL_G_x0.5.json
+SAME U2 neg_MUSTFAIL_G_x0.99.json
+SAME U2 neg_MUSTFAIL_X_capacity_4.json
+SAME U2 neg_MUSTFAIL_budget_violation.json
+SAME U2 neg_MUSTFAIL_drop_heaviest.json
+SAME U2 neg_MUSTFAIL_drop_second_heaviest.json
+SAME U2 neg_MUSTFAIL_nodes_swapped.json
+SAME U2 neg_MUSTFAIL_nonprimitive.json
+SAME U2 neg_MUSTFAIL_reducible_weighted.json
+SAME U2 neg_MUSTFAIL_v_minus_1e-6.json
+SAME U2 neg_MUSTFAIL_v_minus_2e-9.json
+SAME U2 neg_NARROWDIP.json
+SAME U2 neg_OPEN_G_x1.01.json
+SAME U2 neg_OPEN_b_heaviest_x0.99.json
+SAME U2 neg_OPEN_b_heaviest_x1.01.json
+SAME U2 neg_OPEN_coeff_x2m3xp1_to_x2m3xm1.json
+SAME U2 neg_POSITIVE_v_plus_1e-6.json
+U2 frozen-dir json count: 18, regenerated: 18
+DIFF-LOG U2 gen.log
+DIFF-LOG U2 dip_gen.log
+
+== freeze_checks.sh (verbatim, the lines for the upper controls)
+#!/bin/bash
+# Pre-freeze checks on <server>: Table-2 reproduction on both transcriptions; regenerate every control and compare bytes.
+cd <working directory>
+PY=<python>
+R=freeze_checks; mkdir -p $R/negL1 $R/negU2
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+[...]
+nice -n 10 $PY -I -B make_neg_up_arl.py cert_arlup_U2.json $R/negU2 > $R/negU2/gen.log 2>&1
+nice -n 10 $PY -I -B make_dip_arl_up.py cert_arlup_U2.json $R/negU2/neg_NARROWDIP.json > $R/negU2/dip_gen.log 2>&1
+[...]

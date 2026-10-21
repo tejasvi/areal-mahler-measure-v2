@@ -1,0 +1,8 @@
+upper/negative_controls/neg_POSITIVE_v_plus_1e-6.json: tpmahler-areal-upper-v1, 23 polynomials (23 weighted), 3170 nodes on [0.155, 16.0], s = 1.0000000000000016
+moments exact: True; data errors: none
+(U1) sum b deg = 0.9395242426 < s = 1.0000000000: True
+(U2) all weighted: True; smallest int log|Q| dmu = 1.0000e-07 (Q_1)
+(V) (1/s) int g dmu = [0.325189754087824 +/- 4.64e-16] (exact rational part -0.230824436542); claim v = 0.325190755077; margin 1.001e-06: True
+(U3) [0.155, 16.0]: 9839 interval tests, coverage exact: True, failures: 0, brackets 138, smallest certified lower bound 3.0607e-10 near 6.30625  [15s]
+VERIFIED: log lambda_A+ <= v = 325190755077/1000000000000; lambda_A+ <= e^v = [1.38429468203550 +/- 4.19e-15]
+[18s]

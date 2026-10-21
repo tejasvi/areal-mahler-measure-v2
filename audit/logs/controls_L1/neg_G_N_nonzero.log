@@ -1,0 +1,29 @@
+lower/negative_controls/neg_G_N_nonzero.json: tpmahler-areal-lower-v1, 28 polynomials (28 weighted), 2001 nodes on [0.0, 20.0], s = 0.08173036348696966
+moments exact: False; data errors: ['G']
+budget sum c deg + 2s = 0.902471175815 < 1: True; kappa = 0.0975288242
+energy I = [-5.45123976915e-6 +/- 4.29e-18]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.54692 +/- 3.47e-7]: True
+right tail [4897, inf): F >= [0.194996 +/- 3.48e-7] (increasing): True
+F >= 0 on the main range [0.001, 4897.0]: 10210 interval tests, coverage exact: True, failures: 209, brackets 189, smallest certified lower bound 3.2240e-08 near 6.538125  [184s]
+   FAILED near (3.155, 'value [-8.6488e-7 +/- 3.68e-12] < 0')
+   FAILED near (3.165, 'value [-2.2595e-6 +/- 1.09e-11] < 0')
+   FAILED near (3.1725, 'value [-5.7312e-7 +/- 2.58e-12] < 0')
+   FAILED near (3.3475, 'value [-2.0922e-7 +/- 5.59e-13] < 0')
+   FAILED near (3.355, 'value [-3.2702e-6 +/- 8.27e-12] < 0')
+   FAILED near (3.365, 'value [-1.2841e-6 +/- 2.15e-11] < 0')
+   FAILED near (3.595, 'value [-3.5366e-6 +/- 4.62e-11] < 0')
+   FAILED near (3.605, 'value [-4.0765e-6 +/- 2.61e-11] < 0')
+   FAILED near (3.61125, 'value [-5.2050e-7 +/- 2.20e-12] < 0')
+   FAILED near (6.539375, 'value [-4.2636e-8 +/- 4.44e-13] < 0')
+   FAILED near (6.545, 'value [-6.1422e-7 +/- 2.95e-12] < 0')
+   FAILED near (6.555, 'value [-1.1678e-6 +/- 2.91e-11] < 0')
+   FAILED near (6.565, 'value [-1.1182e-6 +/- 4.76e-12] < 0')
+   FAILED near (6.575, 'value [-4.4878e-7 +/- 3.14e-12] < 0')
+   FAILED near (8.3375, 'value [-8.4373e-7 +/- 3.66e-12] < 0')
+   FAILED near (8.345, 'value [-4.3138e-6 +/- 4.42e-12] < 0')
+   FAILED near (8.355, 'value [-8.4190e-6 +/- 5.41e-12] < 0')
+   FAILED near (8.365, 'value [-1.1931e-5 +/- 4.93e-10] < 0')
+   FAILED near (8.375, 'value [-1.4833e-5 +/- 2.49e-10] < 0')
+   FAILED near (8.385, 'value [-1.7064e-5 +/- 2.50e-10] < 0')
+NOT VERIFIED
+[198s]

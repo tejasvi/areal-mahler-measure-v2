@@ -1,0 +1,18 @@
+neg_MUSTFAIL_X_capacity_4.json exit=1 : NOT VERIFIED
+neg_MUSTFAIL_G_N_nonzero.json exit=1 : NOT VERIFIED
+neg_MUSTFAIL_G_x0.5.json exit=1 : NOT VERIFIED
+neg_MUSTFAIL_budget_violation.json exit=1 : NOT VERIFIED
+neg_MUSTFAIL_nodes_swapped.json exit=1 : NOT VERIFIED
+neg_MUSTFAIL_nonprimitive.json exit=1 : NOT VERIFIED
+neg_MUSTFAIL_reducible_weighted.json exit=1 : NOT VERIFIED
+neg_MUSTFAIL_drop_heaviest.json exit=1 : NOT VERIFIED
+neg_MUSTFAIL_v_minus_1e-6.json exit=1 : NOT VERIFIED
+neg_MUSTFAIL_drop_second_heaviest.json exit=1 : NOT VERIFIED
+neg_MUSTFAIL_v_minus_2e-9.json exit=1 : NOT VERIFIED
+neg_OPEN_G_x1.01.json exit=1 : NOT VERIFIED
+neg_OPEN_b_heaviest_x0.99.json exit=1 : NOT VERIFIED
+neg_OPEN_coeff_x2m3xp1_to_x2m3xm1.json exit=1 : NOT VERIFIED
+neg_MUSTFAIL_G_x0.99.json exit=1 : NOT VERIFIED
+neg_OPEN_b_heaviest_x1.01.json exit=1 : NOT VERIFIED
+neg_POSITIVE_v_plus_1e-6.json exit=0 : VERIFIED: log lambda_A+ <= v = 325190755077/1000000000000 <= 0.3251907551; lambda_A+ <= e^v <= 1.3842947 (also E_A+)  (85s)
+ALLDONE

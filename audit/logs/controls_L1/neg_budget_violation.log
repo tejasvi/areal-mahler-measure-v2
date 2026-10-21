@@ -1,0 +1,29 @@
+lower/negative_controls/neg_budget_violation.json: tpmahler-areal-lower-v1, 29 polynomials (29 weighted), 2001 nodes on [0.0, 20.0], s = 0.08173035848696966
+moments exact: True; data errors: none
+budget sum c deg + 2s = 1.402471165815 < 1: False; kappa = -0.4024711658
+energy I = [5.50777014626e-11 +/- 4.74e-23]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.54141 +/- 4.19e-6]: True
+right tail [4897, inf): F >= [-4.06006 +/- 1.94e-6] (increasing): False
+F >= 0 on the main range [0.001, 4897.0]: 2438 interval tests, coverage exact: True, failures: 2253, brackets 190, smallest certified lower bound -1.4068e+00 near 16.699730157003735  [7s]
+   FAILED near (0.145, 'value [-0.00060535 +/- 1.36e-9] < 0')
+   FAILED near (0.155, 'value [-0.0041680 +/- 3.12e-8] < 0')
+   FAILED near (0.16488856724795142, 'value [-0.0049096 +/- 3.44e-8] < 0')
+   FAILED near (0.1698885672479514, 'value [-0.0047190 +/- 1.70e-8] < 0')
+   FAILED near (0.1709365552454823, 'value [-0.0049473 +/- 1.64e-8] < 0')
+   FAILED near (0.1718731104909646, 'bracket of Q_[16]')
+   FAILED near (0.17333973021489238, 'value [-0.0048416 +/- 4.98e-8] < 0')
+   FAILED near (0.1770928423616921, 'value [-0.0051251 +/- 4.63e-8] < 0')
+   FAILED near (0.17937933478456405, 'bracket of Q_[27]')
+   FAILED near (0.179689667392282, 'value [-0.0053805 +/- 3.40e-8] < 0')
+   FAILED near (0.18280645855371686, 'value [-0.0054896 +/- 4.16e-8] < 0')
+   FAILED near (0.18561291710743372, 'bracket of Q_[25]')
+   FAILED near (0.18755556037577745, 'value [-0.0054512 +/- 3.03e-9] < 0')
+   FAILED near (0.18949820364412118, 'bracket of Q_[24]')
+   FAILED near (0.1897491018220606, 'value [-0.0053786 +/- 4.74e-8] < 0')
+   FAILED near (0.1908048280520044, 'value [-0.0053004 +/- 1.88e-8] < 0')
+   FAILED near (0.19160965610400882, 'bracket of Q_[26]')
+   FAILED near (0.19368275191480708, 'value [-0.0050187 +/- 3.19e-8] < 0')
+   FAILED near (0.1963795755545704, 'value [-0.0046726 +/- 1.26e-8] < 0')
+   FAILED near (0.19700330338353544, 'bracket of Q_[23]')
+NOT VERIFIED
+[22s]

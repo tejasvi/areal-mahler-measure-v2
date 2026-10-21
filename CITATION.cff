@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use these certificates or programs, please cite the paper."
+title: "Bounds for the smallest limit point of the areal Mahler measure of totally positive algebraic integers"
+authors:
+  - family-names: Tomar
+    given-names: Tejasvi Singh
+    orcid: "https://orcid.org/0000-0003-4668-3639"
+license: Apache-2.0
+repository-code: "https://github.com/tejasvi/areal-mahler-measure-v2"
+doi: 10.5281/zenodo.23537180
+preferred-citation:
+  type: article
+  title: "Bounds for the smallest limit point of the areal Mahler measure of totally positive algebraic integers"
+  authors:
+    - family-names: Tomar
+      given-names: Tejasvi Singh
+      orcid: "https://orcid.org/0000-0003-4668-3639"
+  doi: 10.5281/zenodo.23537179
+  year: 2026

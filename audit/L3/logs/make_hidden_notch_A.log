@@ -1,0 +1,1 @@
+notch at x0 = 0.688205333 (G = 0.1237), flat half-width 1.0e-06, ramps 5.0e-07, height 0.04402, mass 1.1004e-07: F_new(x0) = [-7.4669e-8 +/- 3.16e-13] < 0; min over 62 check points = [9.5122e-9 +/- 4.77e-14] at 0.6882063 > 0; I/s change +1.35e-07; file ../regen/lower_hidden/L3_notch_A_x0.6882.json

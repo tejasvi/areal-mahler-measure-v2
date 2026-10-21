@@ -1,0 +1,3 @@
+windows 230, tasks 4790 (140s)
+probe done (220s); total checks 26705; heavy/capped/failed: 1; checker chunksize at 48 procs = 12
+   (4789, 'CAP', 400, 14, 28.9440598487854, 24.0, 4357.0, 11, (4305.164794921875, 4305.6937255859375)) chunk 399

@@ -1,0 +1,29 @@
+lower/negative_controls/neg_G_N_nonzero.json: tpmahler-areal-lower-v1, 34 polynomials (34 weighted), 4660 nodes on [0.0, 24.0], s = 0.0955758959546068
+moments exact: False; data errors: ['G']
+budget sum c deg + 2s = 0.903938477019 < 1: True; kappa = 0.0960615230
+energy I = [-8.62761887646e-6 +/- 3.99e-18]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.53245 +/- 4.19e-6]: True
+right tail [4357, inf): F >= [0.192055 +/- 4.74e-8] (increasing): True
+F >= 0 on the main range [0.001, 4357.0]: 40979 interval tests, coverage exact: True, failures: 1023, brackets 230, smallest certified lower bound -5.0949e-05 near 13.192529743477923  [623s]
+   FAILED near (3.33875, 'value [-4.2123e-7 +/- 7.08e-13] < 0')
+   FAILED near (3.345, 'value [-1.9869e-6 +/- 2.38e-11] < 0')
+   FAILED near (3.355, 'value [-3.3416e-6 +/- 3.14e-11] < 0')
+   FAILED near (3.365, 'value [-3.5299e-6 +/- 3.37e-11] < 0')
+   FAILED near (3.375, 'value [-2.2979e-6 +/- 7.55e-12] < 0')
+   FAILED near (3.3825, 'value [-2.3259e-7 +/- 4.01e-12] < 0')
+   FAILED near (3.465, 'value [-1.4739e-6 +/- 5.16e-12] < 0')
+   FAILED near (3.4728625076, 'value [-3.6146e-6 +/- 2.99e-11] < 0')
+   FAILED near (3.4759750152, 'value [-3.9759e-6 +/- 3.87e-11] < 0')
+   FAILED near (3.4764750152, 'value [-3.9343e-6 +/- 1.06e-12] < 0')
+   FAILED near (3.4769750152, 'value [-3.8027e-6 +/- 3.93e-11] < 0')
+   FAILED near (3.4774750152, 'value [-3.7607e-6 +/- 4.41e-11] < 0')
+   FAILED near (3.4779750152, 'value [-3.7323e-6 +/- 2.27e-11] < 0')
+   FAILED near (3.4784750152, 'value [-3.6496e-6 +/- 1.80e-11] < 0')
+   FAILED near (3.4789750152, 'value [-3.4159e-6 +/- 4.75e-11] < 0')
+   FAILED near (3.4794750152, 'value [-3.2299e-6 +/- 3.28e-12] < 0')
+   FAILED near (3.4798625076119865, 'value [-3.2678e-6 +/- 1.10e-11] < 0')
+   FAILED near (3.4801125076, 'value [-3.6080e-6 +/- 4.38e-11] < 0')
+   FAILED near (3.4804750152, 'value [-3.6369e-6 +/- 4.16e-11] < 0')
+   FAILED near (3.4809750152, 'value [-3.6511e-6 +/- 1.86e-11] < 0')
+NOT VERIFIED
+[657s]

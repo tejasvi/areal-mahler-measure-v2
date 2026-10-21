@@ -1,0 +1,29 @@
+lower/negative_controls/neg_budget_violation.json: tpmahler-areal-lower-v1, 35 polynomials (35 weighted), 4660 nodes on [0.0, 24.0], s = 0.09557589095460681
+moments exact: True; data errors: none
+budget sum c deg + 2s = 1.403938467019 < 1: False; kappa = -0.4039384670
+energy I = [1.09650468663e-10 +/- 2.26e-22]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.52694 +/- 1.49e-6]: True
+right tail [4357, inf): F >= [-4.00456 +/- 4.42e-6] (increasing): False
+F >= 0 on the main range [0.001, 4357.0]: 5179 interval tests, coverage exact: True, failures: 4907, brackets 231, smallest certified lower bound -1.2917e+00 near 13.24398417560287  [21s]
+   FAILED near (0.145, 'value [-0.0026809 +/- 3.83e-9] < 0')
+   FAILED near (0.155, 'value [-0.0054200 +/- 7.29e-9] < 0')
+   FAILED near (0.16288856725, 'value [-0.0053996 +/- 3.38e-8] < 0')
+   FAILED near (0.1660271345, 'value [-0.0054415 +/- 4.68e-10] < 0')
+   FAILED near (0.1665271345, 'value [-0.0054378 +/- 2.21e-8] < 0')
+   FAILED near (0.1670271345, 'value [-0.0054433 +/- 1.56e-8] < 0')
+   FAILED near (0.1675271345, 'value [-0.0054452 +/- 4.93e-8] < 0')
+   FAILED near (0.1680271345, 'value [-0.0054481 +/- 2.50e-8] < 0')
+   FAILED near (0.1685271345, 'value [-0.0054504 +/- 4.07e-8] < 0')
+   FAILED near (0.1690271345, 'value [-0.0054526 +/- 9.90e-9] < 0')
+   FAILED near (0.1695271345, 'value [-0.0054546 +/- 2.58e-8] < 0')
+   FAILED near (0.16988856725, 'value [-0.0054559 +/- 8.55e-9] < 0')
+   FAILED near (0.17013856725, 'value [-0.0054567 +/- 2.58e-8] < 0')
+   FAILED near (0.1705271345, 'value [-0.0054578 +/- 4.77e-8] < 0')
+   FAILED near (0.1710271345, 'value [-0.0054590 +/- 9.94e-9] < 0')
+   FAILED near (0.1715271345, 'value [-0.0054597 +/- 4.06e-8] < 0')
+   FAILED near (0.1718251224954823, 'value [-0.0054594 +/- 1.09e-9] < 0')
+   FAILED near (0.1718731104909646, 'bracket of Q_[20]')
+   FAILED near (0.1720751224954823, 'value [-0.0054603 +/- 4.19e-8] < 0')
+   FAILED near (0.1725271345, 'value [-0.0054606 +/- 2.75e-8] < 0')
+NOT VERIFIED
+[56s]

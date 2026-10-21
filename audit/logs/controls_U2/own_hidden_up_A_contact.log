@@ -1,0 +1,9 @@
+../release_arl_audit/controls/upper_hidden/hidden_up_A_contact.json: tpmahler-areal-upper-v1, 23 polynomials (23 weighted), 3174 nodes on [0.155, 16.0], s = 1.0000001187500016
+moments exact: True; data errors: none
+(U1) sum b deg = 0.9395242426 < s = 1.0000001188: True
+(U2) all weighted: True; smallest int log|Q| dmu = 3.1607e-07 (Q_1)
+(V) (1/s) int g dmu = [0.325189949377110 +/- 3.00e-16] (exact rational part -0.230824436542); claim v = 0.325190755077; margin 8.057e-07: True
+(U3) [0.155, 16.0]: 11131 interval tests, coverage exact: True, failures: 1, brackets 138, smallest certified lower bound 2.0793e-09 near 6.744375  [15s]
+   FAILED near (7.168750033333334, 'value [-3.1788e-8 +/- 1.42e-15] < 0')
+NOT VERIFIED
+[18s]

@@ -1,0 +1,19 @@
+Redacted copies of the release/REPRO_EXPORT.txt files of the two frozen packages (the first with the L1 and U2 certificates,
+the second with the L3 certificate): only the description of the server in their first lines is changed (there were no home
+paths). The paths are those of the frozen packages: release/NAME_<sha8>.py = NAME.py in this directory, release/lp/ = lp/,
+lower/ and upper/ = ../certificate/lower/ and ../certificate/upper/ (the L1 certificate, lower/cert_arllo_L1_4c5758a0.json,
+is not in this release); 'live' = the project's working tree at the time (its scripts/tpsets.py is the original of tpsets.py
+here, its data/A58.json and data/A58v.json are data/A58.json and data/A58v.json here).
+
+Export reproduction, run 2026-10-21 03:31 PDT on another, shared server from the frozen copies in release/ (their tpsets import resolves to the live scripts/tpsets.py, sha 76b8b1e3, identical to release/tpsets_76b8b1e3.py; set A58 = live data/A58.json, sha 9f9223d2 = release/A58_9f9223d2.json)
+$ python -I -B release/export_arl_lo_2168a33c.py release/lp/primal_L1_56b810dd.npy release/lp/primal_L1_arldualN_A58_ba0fdb83.npy A58 3e-6 OUT_L1.json
+polys 28, nodes 2001, s = 0.081730 (lam 0.081730), budget sum c deg + 2s = 0.9025, kappa 0.0975, beta 0.6336, x_lo 1/1000, x_hi 4897, m_cert 0.3237827034 (Omega 1.3823469)
+cmp OUT_L1.json lower/cert_arllo_L1_4c5758a0.json: BYTE-IDENTICAL
+$ python -I -B release/export_arl_up_1aefad85.py release/lp/arlup_U2_288a23da.npy A58 1e-9 OUT_U2.json
+23 active polys, 3170 nodes on [0.1550, 16.0000], s = 1.000000000000, sum b deg = 0.939524, (1/s) int g = 0.3251897541, v = 0.3251897551 (lambda+ <= 1.3842933, float display rounded up; check_up.py gives the rigorous value)
+cmp OUT_U2.json upper/cert_arlup_U2_cb2c7960.json: BYTE-IDENTICAL
+
+Export reproduction, run 2026-10-21 05:42 PDT on another, shared server from the frozen copies in release/ (their tpsets import resolves to the live scripts/tpsets.py, sha 76b8b1e3, identical to release/tpsets_76b8b1e3.py; set A58v = live data/A58v.json, sha 961553a5 = release/A58v_961553a5.json)
+$ python -I -B release/export_arl_lo_2168a33c.py release/lp/primal_L3_7cd5ed67.npy release/lp/primal_L3_arldualN_A58v_daa030e9.npy A58v 3e-6 OUT_L3.json
+polys 34, nodes 4660, s = 0.095576 (lam 0.095576), budget sum c deg + 2s = 0.9039, kappa 0.0961, beta 0.6128, x_lo 1/1000, x_hi 4357, m_cert 0.3242647675 (Omega 1.3830134)
+cmp OUT_L3.json lower/cert_arllo_L3_5295faaa.json: BYTE-IDENTICAL

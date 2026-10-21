@@ -1,0 +1,8 @@
+polys 34 (active 34), nodes 4660, s = 0.09557589, m = 0.3242667675
+budget sum c deg + 2 s = 0.903938 < 1  OK;  I = [1.09650468663225691450193788089374782506e-10 +/- 6.87e-49]
+left tail (0, x_lo]: True 1.532429750910245
+right tail [x_hi, inf): True 0.19214340211447195 kappa 0.09606153298109128
+root windows: 230  (133s)
+chord intervals: 4790
+interval checks: 71650; smallest endpoint lower bound 9.6323e-07
+VERIFIED: log lambda_A+ >= m = 45636490420267004047/140737488355328000000; N0 >= e^m >= 1.3830162 (also E_A+)  (3487s)

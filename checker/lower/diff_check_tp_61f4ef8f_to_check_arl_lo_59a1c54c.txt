@@ -1,0 +1,132 @@
+--- certs/check_tp_61f4ef8f.py	2026-10-21 00:31:53.995015241 +0000
++++ areal/check_arl_lo.py	2026-10-21 08:04:12.683192936 +0000
+@@ -1,27 +1,29 @@
+ #!/usr/bin/env python3
+-"""check_tp.py -- rigorous checker for tpmahler certificates: a lower bound for Smyth's limit point lambda+ of the absolute Mahler
+-measure Omega = M(alpha)^{1/deg} of totally positive algebraic integers (and, under the budget below, of all totally positive
+-algebraic numbers; via alpha -> alpha^2, half of log of it bounds liminf h over totally real numbers).
++"""check_arl_lo.py -- rigorous checker for AREAL (Pritsker-measure) lower-bound certificates: a lower bound for the smallest limit
++point lambda_A+ (and the essential minimum E_A+) of the absolute Pritsker measure N0 = ||P_alpha||_0^{1/deg} of totally positive
++algebraic integers (also of all totally positive algebraic numbers). Derived from check_tp_61f4ef8f.py (the audited tpmahler lower-bound
++checker) by replacing log+ x with g(x) = log+ x + (min(1, x)^2 - 1)/2 (Lemma TA1 = Lemma TP1 with g; tpmahler/PROGRESS.md).
+ 
+-Certificate (JSON, "tpmahler-cert-v1"):
++Certificate (JSON, "tpmahler-areal-lower-v1"; same fields as "tpmahler-cert-v1"):
+   polys : integer polynomials Q_j (coefficients highest degree first); must contain x = [1, 0]
+   c     : rationals c_j >= 0 ("p/q"), one per polynomial
+   nodes : rationals e_0 < e_1 < ... < e_N, e_0 >= 0
+   G     : rationals G_0..G_N >= 0 with G_0 = G_N = 0 (values of a continuous piecewise-linear density at the nodes)
+-  m     : rational (claim: log lambda+ >= m)
++  m     : rational (claim: log lambda_A+ >= m)
+   x_lo, x_hi : rationals (tail cut points)
+ Definitions (rebuilt here from scratch): rho = G(x) dx, s = rho(R) = sum_k (e_{k+1}-e_k)(G_k+G_{k+1})/2,
+   U(x) = int log|x-y| G(y) dy, I = int int log|x-y| G(x) G(y) dx dy,
+-  F(x) = log+ x - m - sum_j c_j log|Q_j(x)| - 2 U(x) + I/s.
++  F(x) = g(x) - m - sum_j c_j log|Q_j(x)| - 2 U(x) + I/s,  g(x) = log+ x + (min(1, x)^2 - 1)/2.
+ VERIFIED means: (i) data constraints; (ii) budget sum_j c_j deg Q_j + 2 s < 1 (strict); (iii) F(x) >= 0 for all x in (0, inf)
+ (F = +inf at positive roots of the Q_j with c_j > 0). With nu = rho/s and lambda = s this is (H0)-(H3) and (H2') of Lemma TP1
+-(tpmahler/PROGRESS.md), so log lambda+ >= m, the essential minimum E+ >= e^m, also for all totally positive numbers.
++with g in place of log+ (Lemma TA1), so log lambda_A+ >= m, E_A+ >= e^m, also for all totally positive numbers.
+ Closed forms: G'' = sum_i C_i delta_{e_i} (exact slope jumps), U(x) = sum_i C_i H(e_i - x), H(t) = t^2/2 log|t| - 3t^2/4,
+ I = sum_{i,j} C_i C_j J(e_i - e_j), J(t) = t^4/24 log|t| - 25 t^4/288 (H'' = log|t|, J'' = H).
+-Positivity: tails (0, x_lo] and [x_hi, inf) by monotone bounds; on [x_lo, x_hi] root windows (squarefree parts, Sturm counts,
+-exact sign-change brackets, ball evaluation with log of the upper bound of |Q|), a breakpoint at x = 1 (corner of log+), and the
+-chord bound F >= min(F(p),F(q)) - (h/4) int_p^q (F'')_+ with rigorous ball bounds; (log+)'' <= 0 off x = 1 is dropped.
+-Usage: check_tp.py CERT.json [NPROC]
++Positivity: tails (0, x_lo] (g >= -1/2 there) and [x_hi, inf) by monotone bounds; on [x_lo, x_hi] root windows (squarefree parts,
++Sturm counts, exact sign-change brackets, ball evaluation with log of the upper bound of |Q|; g increasing, so g >= g(lower end)), a
++breakpoint at x = 1 (g'' jumps there), and the chord bound F >= min(F(p),F(q)) - (h/4) int_p^q (F'')_+ with rigorous ball bounds;
++g'' = 1 on (0, 1) is added to the regular part, g'' = -1/x^2 <= 0 on (1, inf) is dropped.
++Usage: check_arl_lo.py CERT.json [NPROC]   (refuses python -O)
+ """
+ import json, sys, math, time
+ from fractions import Fraction as Fr
+@@ -93,7 +95,7 @@
+ class Cert:
+     def __init__(self, path):
+         d = json.load(open(path))
+-        require(d.get('format') == 'tpmahler-cert-v1', "unknown format")
++        require(d.get('format') == 'tpmahler-areal-lower-v1', "unknown format")
+         self.polys = [[int(a) for a in q] for q in d['polys']]
+         require(all(isinstance(a, int) for q in d['polys'] for a in q), "non-integer coefficient")
+         self.c = [Fr(x) for x in d['c']]
+@@ -167,19 +169,26 @@
+         return v
+ 
+ 
+-def logplus_lower(x):                  # a lower bound of log+ over the ball x
++def g_lower(x):                        # a lower bound of g over the ball x (g is increasing on [0, inf))
+     lo = x.lower()
+-    return lo.log() if lo > 1 else arb(0)
++    if lo >= 1:
++        return lo.log()
++    lo0 = lo if lo > 0 else arb(0)
++    return (lo0*lo0 - 1)/2
++
++
++def g_exact(xf):                       # g at a rational point xf > 0
++    return A(xf).log() if xf >= 1 else A((xf*xf - 1)/2)
+ 
+ 
+ def setup(cert):
+     cert.I = cert.energy()
+-    cert.const = cert.I/A(cert.s) - A(cert.m)       # F = log+ x + const - sum c log|Q| - 2U
++    cert.const = cert.I/A(cert.s) - A(cert.m)       # F = g(x) + const - sum c log|Q| - 2U
+     return cert
+ 
+ 
+ def F_exact(cert, xf):
+-    v = cert.const + (A(xf).log() if xf > 1 else arb(0))
++    v = cert.const + g_exact(xf)
+     for q, l, _ in cert.active:
+         Qx = polyval_exact(q, xf)
+         require(Qx != 0, "evaluation exactly at a root")
+@@ -192,7 +201,8 @@
+     """regular and singular upper bounds of (F'')_+ data on [p, q] (Fractions, p < q, no node strictly inside, 1 not inside)."""
+     X = ball(p, q)
+     h = q - p
+-    reg = arb(0)
++    require(not (p < 1 < q), "chord interval crosses x = 1")
++    reg = arb(1) if q <= 1 else arb(0)          # g'' = 1 on (0, 1); g'' = -1/x^2 <= 0 on (1, inf) is dropped
+     Xc = acb(X)
+     for (qq, l, _), rs in zip(cert.active, cert.roots):
+         tot = arb(0)
+@@ -322,7 +332,7 @@
+     X = ball(L, R)
+     cm = (L + R)/2
+     rad = A((R - L)/2)
+-    v = cert.const + logplus_lower(X)
++    v = cert.const + g_lower(X)
+     for qq, l, _ in cert.active:
+         Qc = abs(A(polyval_exact(qq, cm)))
+         Q1 = polyval(polyder(qq), X) if len(qq) > 1 else arb(0)
+@@ -380,7 +390,7 @@
+ def tail_left(cert):
+     x_lo = cert.x_lo
+     require(0 < x_lo <= cert.first and x_lo < 1, "x_lo must be in (0, 1) and at or left of the support")
+-    v = cert.const - A(cert.cx)*A(x_lo).log()        # log+ = 0 on (0, x_lo]; -c_x log x >= -c_x log x_lo
++    v = cert.const - arb(1)/2 - A(cert.cx)*A(x_lo).log()   # g >= -1/2 on (0, x_lo]; -c_x log x >= -c_x log x_lo
+     K = 64                                            # max |Q| on [0, x_lo] from K sub-balls (upper bounds)
+     subs = [ball(x_lo*k/K, x_lo*(k + 1)/K) for k in range(K)]
+     for q, l, _ in cert.active:
+@@ -436,6 +446,9 @@
+ def main():
+     import multiprocessing as mp
+     global _CERT
++    if sys.flags.optimize:
++        print("refusing to run under python -O / -OO")
++        sys.exit(2)
+     t0 = time.time()
+     path = sys.argv[1]
+     nproc = int(sys.argv[2]) if len(sys.argv) > 2 else 8
+@@ -478,7 +491,9 @@
+             print(f"  FAILED near x = {float(t[0]):.6f}: lower {r[2]:.3e} at {r[3]}")
+         print(f"NOT VERIFIED ({len(bad)} failed; {time.time() - t0:.0f}s)")
+         sys.exit(1)
+-    print(f"VERIFIED: log lambda+ >= m = {cert.m} = {float(cert.m):.10f}; Omega >= {math.exp(float(cert.m)):.7f}  ({time.time() - t0:.0f}s)")
++    E = A(cert.m).exp()
++    lo7 = math.floor(arb_to_fr(E.lower())*10**7)
++    print(f"VERIFIED: log lambda_A+ >= m = {cert.m}; N0 >= e^m >= {lo7 // 10**7}.{str(lo7 % 10**7).zfill(7)} (also E_A+)  ({time.time() - t0:.0f}s)")
+     sys.exit(0)
+ 
+ 

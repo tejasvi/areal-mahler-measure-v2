@@ -1,0 +1,29 @@
+lower/negative_controls/neg_G_times_0.99.json: tpmahler-areal-lower-v1, 28 polynomials (28 weighted), 2001 nodes on [0.0, 20.0], s = 0.08091305490209996
+moments exact: True; data errors: none
+budget sum c deg + 2s = 0.900836558645 < 1: True; kappa = 0.0991634414
+energy I = [5.39816552035e-11 +/- 4.08e-23]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.54691 +/- 2.76e-6]: True
+right tail [4897, inf): F >= [0.208951 +/- 3.24e-7] (increasing): True
+F >= 0 on the main range [0.001, 4897.0]: 9824 interval tests, coverage exact: True, failures: 159, brackets 189, smallest certified lower bound -1.0398e-03 near 0.26612619134152793  [186s]
+   FAILED near (0.16488856724795142, 'value [-0.00024841 +/- 3.88e-9] < 0')
+   FAILED near (0.1698885672479514, 'value [-0.00010331 +/- 3.07e-9] < 0')
+   FAILED near (0.1709365552454823, 'value [-0.00034087 +/- 2.94e-9] < 0')
+   FAILED near (0.17333973021489238, 'value [-0.00025612 +/- 1.19e-9] < 0')
+   FAILED near (0.1770928423616921, 'value [-0.00057104 +/- 6.16e-10] < 0')
+   FAILED near (0.17937933478456405, 'bracket of Q_[27]')
+   FAILED near (0.179689667392282, 'value [-0.00084727 +/- 3.14e-9] < 0')
+   FAILED near (0.18280645855371686, 'value [-0.00097998 +/- 1.95e-9] < 0')
+   FAILED near (0.18755556037577745, 'value [-0.00097505 +/- 4.86e-9] < 0')
+   FAILED near (0.18949820364412118, 'bracket of Q_[24]')
+   FAILED near (0.1897491018220606, 'value [-0.00091703 +/- 7.68e-10] < 0')
+   FAILED near (0.1908048280520044, 'value [-0.00084568 +/- 3.39e-9] < 0')
+   FAILED near (0.19368275191480708, 'value [-0.00058191 +/- 4.57e-9] < 0')
+   FAILED near (0.1963795755545704, 'value [-0.00025082 +/- 3.81e-9] < 0')
+   FAILED near (0.19850165169176773, 'value [-0.00036637 +/- 3.24e-9] < 0')
+   FAILED near (0.20268279272078973, 'value [-0.00081972 +/- 1.81e-9] < 0')
+   FAILED near (0.20536558544157946, 'bracket of Q_[27]')
+   FAILED near (0.2056658063052226, 'value [-0.0010888 +/- 4.44e-8] < 0')
+   FAILED near (0.20640671825011575, 'value [-0.0010683 +/- 2.35e-8] < 0')
+   FAILED near (0.20842370466568286, 'value [-0.0010281 +/- 1.49e-8] < 0')
+NOT VERIFIED
+[201s]

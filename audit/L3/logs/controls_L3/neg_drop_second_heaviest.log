@@ -1,0 +1,29 @@
+lower/negative_controls/neg_drop_second_heaviest.json: tpmahler-areal-lower-v1, 34 polynomials (33 weighted), 4660 nodes on [0.0, 24.0], s = 0.09557589095460681
+moments exact: True; data errors: none
+budget sum c deg + 2s = 0.847719084116 < 1: True; kappa = 0.1522809159
+energy I = [1.09650468663e-10 +/- 2.26e-22]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.53243 +/- 1.59e-6]: True
+right tail [4357, inf): F >= [0.708479 +/- 2.82e-7] (increasing): True
+F >= 0 on the main range [0.001, 4357.0]: 29600 interval tests, coverage exact: True, failures: 1691, brackets 228, smallest certified lower bound -9.0449e-02 near 0.39461825183493443  [479s]
+   FAILED near (0.135, 'value [-0.0034042 +/- 2.21e-8] < 0')
+   FAILED near (0.145, 'value [-0.012209 +/- 4.60e-7] < 0')
+   FAILED near (0.155, 'value [-0.016274 +/- 4.34e-7] < 0')
+   FAILED near (0.16288856725, 'value [-0.017339 +/- 4.39e-7] < 0')
+   FAILED near (0.1660271345, 'value [-0.017822 +/- 7.29e-8] < 0')
+   FAILED near (0.1665271345, 'value [-0.017889 +/- 2.90e-7] < 0')
+   FAILED near (0.1670271345, 'value [-0.017966 +/- 2.01e-7] < 0')
+   FAILED near (0.1675271345, 'value [-0.018039 +/- 1.33e-7] < 0')
+   FAILED near (0.1680271345, 'value [-0.018113 +/- 1.47e-7] < 0')
+   FAILED near (0.1685271345, 'value [-0.018187 +/- 5.96e-8] < 0')
+   FAILED near (0.1690271345, 'value [-0.018261 +/- 1.64e-7] < 0')
+   FAILED near (0.1695271345, 'value [-0.018335 +/- 3.59e-7] < 0')
+   FAILED near (0.16988856725, 'value [-0.018388 +/- 2.62e-8] < 0')
+   FAILED near (0.17013856725, 'value [-0.018425 +/- 1.66e-7] < 0')
+   FAILED near (0.1705271345, 'value [-0.018482 +/- 2.93e-8] < 0')
+   FAILED near (0.1710271345, 'value [-0.018555 +/- 4.66e-7] < 0')
+   FAILED near (0.1715271345, 'value [-0.018629 +/- 4.12e-7] < 0')
+   FAILED near (0.1718251224954823, 'value [-0.018672 +/- 4.14e-7] < 0')
+   FAILED near (0.1718731104909646, 'bracket of Q_[20]')
+   FAILED near (0.1720751224954823, 'value [-0.018709 +/- 2.22e-7] < 0')
+NOT VERIFIED
+[513s]

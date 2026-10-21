@@ -1,0 +1,3 @@
+polys 35 (active 35), nodes 4660, s = 0.09557589, m = 0.3242647675
+CheckError: budget sum c_j deg Q_j + 2 s < 1 fails
+NOT VERIFIED

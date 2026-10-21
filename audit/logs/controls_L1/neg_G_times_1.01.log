@@ -1,0 +1,29 @@
+lower/negative_controls/neg_G_times_1.01.json: tpmahler-areal-lower-v1, 28 polynomials (28 weighted), 2001 nodes on [0.0, 20.0], s = 0.08254766207183936
+moments exact: True; data errors: none
+budget sum c deg + 2s = 0.904105772985 < 1: True; kappa = 0.0958942270
+energy I = [5.61847632620e-11 +/- 4.67e-23]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.54691 +/- 2.76e-6]: True
+right tail [4897, inf): F >= [0.181174 +/- 1.96e-7] (increasing): True
+F >= 0 on the main range [0.001, 4897.0]: 9721 interval tests, coverage exact: True, failures: 1744, brackets 189, smallest certified lower bound -3.3689e-03 near 16.699730157003735  [185s]
+   FAILED near (1.465, 'value [-1.0274e-5 +/- 2.89e-10] < 0')
+   FAILED near (1.475, 'value [-8.9575e-5 +/- 3.29e-10] < 0')
+   FAILED near (1.485, 'value [-0.00016041 +/- 3.04e-9] < 0')
+   FAILED near (1.495, 'value [-0.00021522 +/- 3.78e-9] < 0')
+   FAILED near (1.505, 'value [-0.00025543 +/- 1.49e-10] < 0')
+   FAILED near (1.515, 'value [-0.00027835 +/- 4.91e-9] < 0')
+   FAILED near (1.525, 'value [-0.00028109 +/- 4.64e-9] < 0')
+   FAILED near (1.535, 'value [-0.00025710 +/- 1.30e-10] < 0')
+   FAILED near (1.545, 'value [-0.00018924 +/- 4.57e-10] < 0')
+   FAILED near (1.55328800376236, 'value [-3.8242e-5 +/- 3.95e-10] < 0')
+   FAILED near (1.5647351539156154, 'value [-2.1766e-5 +/- 7.19e-11] < 0')
+   FAILED near (1.575, 'value [-8.9847e-5 +/- 4.33e-10] < 0')
+   FAILED near (1.585, 'value [-0.00016920 +/- 2.87e-9] < 0')
+   FAILED near (1.595, 'value [-0.00015654 +/- 8.67e-10] < 0')
+   FAILED near (1.6033111764399632, 'value [-7.7876e-5 +/- 1.90e-10] < 0')
+   FAILED near (1.6068334558249309, 'value [-8.5348e-7 +/- 2.70e-12] < 0')
+   FAILED near (1.6380540158787351, 'value [-5.0186e-6 +/- 1.80e-11] < 0')
+   FAILED near (1.6438222192030727, 'value [-3.2495e-5 +/- 3.24e-10] < 0')
+   FAILED near (1.6494111096015365, 'value [-6.7425e-6 +/- 1.47e-11] < 0')
+   FAILED near (1.655, 'value [-0.00011476 +/- 3.95e-9] < 0')
+NOT VERIFIED
+[199s]

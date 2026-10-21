@@ -1,0 +1,29 @@
+lower/negative_controls/neg_m_plus_1e-5.json: tpmahler-areal-lower-v1, 34 polynomials (34 weighted), 4660 nodes on [0.0, 24.0], s = 0.09557589095460681
+moments exact: True; data errors: none
+budget sum c deg + 2s = 0.903938467019 < 1: True; kappa = 0.0960615330
+energy I = [1.09650468663e-10 +/- 2.26e-22]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.53242 +/- 1.58e-6]: True
+right tail [4357, inf): F >= [0.192135 +/- 4.03e-7] (increasing): True
+F >= 0 on the main range [0.001, 4357.0]: 39835 interval tests, coverage exact: True, failures: 674, brackets 230, smallest certified lower bound -1.5915e-06 near 0.7458000906408719  [598s]
+   FAILED near (0.182554521525, 'value [-2.5355e-7 +/- 2.23e-12] < 0')
+   FAILED near (0.18274612595, 'value [-1.4528e-6 +/- 7.34e-12] < 0')
+   FAILED near (0.18299612595, 'value [-2.8347e-6 +/- 1.38e-11] < 0')
+   FAILED near (0.18324612595, 'value [-4.0079e-6 +/- 4.97e-11] < 0')
+   FAILED near (0.18349612595, 'value [-4.9751e-6 +/- 3.48e-11] < 0')
+   FAILED near (0.1838629171, 'value [-6.0505e-6 +/- 1.30e-11] < 0')
+   FAILED near (0.1843629171, 'value [-6.8876e-6 +/- 5.83e-12] < 0')
+   FAILED near (0.1848629171, 'value [-6.8421e-6 +/- 2.32e-11] < 0')
+   FAILED near (0.18530556035, 'value [-5.5253e-6 +/- 3.32e-11] < 0')
+   FAILED near (0.18555556035371687, 'value [-3.4403e-6 +/- 4.91e-11] < 0')
+   FAILED near (0.18573242364824097, 'value [-8.3009e-7 +/- 2.88e-12] < 0')
+   FAILED near (0.18596163524726206, 'value [-8.0464e-7 +/- 2.10e-12] < 0')
+   FAILED near (0.1862482036, 'value [-4.8064e-6 +/- 9.32e-12] < 0')
+   FAILED near (0.1867482036, 'value [-6.6146e-6 +/- 4.05e-11] < 0')
+   FAILED near (0.1872482036, 'value [-6.1423e-6 +/- 3.79e-11] < 0')
+   FAILED near (0.18772608138821256, 'value [-2.8420e-6 +/- 1.67e-11] < 0')
+   FAILED near (0.1882482036, 'value [-3.1023e-6 +/- 2.79e-12] < 0')
+   FAILED near (0.1887482036, 'value [-4.8627e-6 +/- 8.49e-12] < 0')
+   FAILED near (0.1892482036, 'value [-4.0182e-6 +/- 9.39e-12] < 0')
+   FAILED near (0.1897482036, 'value [-1.1609e-6 +/- 3.08e-11] < 0')
+NOT VERIFIED
+[632s]

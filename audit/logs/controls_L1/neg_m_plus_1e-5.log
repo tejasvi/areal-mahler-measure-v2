@@ -1,0 +1,29 @@
+lower/negative_controls/neg_m_plus_1e-5.json: tpmahler-areal-lower-v1, 28 polynomials (28 weighted), 2001 nodes on [0.0, 20.0], s = 0.08173035848696966
+moments exact: True; data errors: none
+budget sum c deg + 2s = 0.902471165815 < 1: True; kappa = 0.0975288342
+energy I = [5.50777014626e-11 +/- 4.74e-23]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.54690 +/- 2.76e-6]: True
+right tail [4897, inf): F >= [0.195052 +/- 4.37e-7] (increasing): True
+F >= 0 on the main range [0.001, 4897.0]: 10174 interval tests, coverage exact: True, failures: 127, brackets 189, smallest certified lower bound 2.8472e-08 near 13.615  [177s]
+   FAILED near (0.18280645855371686, 'value [-6.4970e-6 +/- 1.83e-11] < 0')
+   FAILED near (0.2051979108965301, 'value [-3.3936e-7 +/- 9.76e-13] < 0')
+   FAILED near (0.2056658063052226, 'value [-6.0683e-6 +/- 3.26e-11] < 0')
+   FAILED near (0.20763555699852432, 'value [-6.9993e-6 +/- 2.67e-11] < 0')
+   FAILED near (0.22243034507324413, 'value [-6.8308e-6 +/- 1.31e-11] < 0')
+   FAILED near (0.23284313983284396, 'value [-5.5926e-6 +/- 7.88e-12] < 0')
+   FAILED near (0.25328609747283926, 'value [-1.5333e-6 +/- 1.91e-11] < 0')
+   FAILED near (0.2655313471496863, 'value [-2.8244e-6 +/- 4.93e-11] < 0')
+   FAILED near (0.3568360615400133, 'value [-6.8510e-6 +/- 3.33e-11] < 0')
+   FAILED near (0.435465884109513, 'value [-3.3082e-6 +/- 1.22e-11] < 0')
+   FAILED near (0.5506154628576152, 'value [-1.2923e-6 +/- 4.26e-11] < 0')
+   FAILED near (0.5720782835700563, 'value [-6.9828e-6 +/- 1.76e-11] < 0')
+   FAILED near (0.5967132909421207, 'value [-6.8875e-6 +/- 3.08e-11] < 0')
+   FAILED near (0.6640318648530048, 'value [-4.9639e-6 +/- 3.80e-11] < 0')
+   FAILED near (0.6937576223431916, 'value [-4.4592e-7 +/- 3.63e-12] < 0')
+   FAILED near (0.6951410223306121, 'value [-6.5822e-6 +/- 3.26e-11] < 0')
+   FAILED near (0.7119098129473937, 'value [-4.4914e-6 +/- 4.46e-12] < 0')
+   FAILED near (0.7347988958525532, 'value [-4.5228e-6 +/- 2.97e-12] < 0')
+   FAILED near (1.515, 'value [-1.9416e-6 +/- 4.15e-11] < 0')
+   FAILED near (1.525, 'value [-5.6969e-6 +/- 4.08e-12] < 0')
+NOT VERIFIED
+[193s]

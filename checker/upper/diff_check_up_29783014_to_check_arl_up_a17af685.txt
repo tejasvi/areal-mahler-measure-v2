@@ -1,0 +1,106 @@
+--- upper/frozen_up_v2/check_up_29783014.py	2026-10-21 07:15:40.335251035 +0000
++++ areal/check_arl_up.py	2026-10-21 08:04:38.901237156 +0000
+@@ -1,15 +1,16 @@
+ #!/usr/bin/env python3
+-"""check_up.py -- rigorous checker for tpmahler UPPER-bound certificates (Smyth's limit point lambda+ of M(alpha)^{1/deg} over
+-totally positive algebraic integers), via Smith's criterion (arXiv:2111.12660, Thm 1.5) in the checkable form of Lemma U1
+-(tpmahler/PROGRESS.md, section "UPPER BOUND").
++"""check_arl_up.py -- rigorous checker for AREAL (Pritsker-measure) UPPER-bound certificates: lambda_A+ (smallest limit point of
++N0(alpha) = ||P_alpha||_0^{1/deg} over totally positive algebraic integers) and E_A+, via Smith's criterion (arXiv:2111.12660, Thm 1.5)
++in the checkable form of Lemma UA1 (= Lemma U1 with log+ replaced by g(x) = log+ x + (min(1, x)^2 - 1)/2; tpmahler/PROGRESS.md).
++Derived from check_up_29783014.py: only the format name and (V) change ((1/s) int g dmu instead of (1/s) int log+ dmu).
+ 
+-Certificate (JSON, "tpmahler-upper-v1"):
++Certificate (JSON, "tpmahler-areal-upper-v1"; same fields as "tpmahler-upper-v1"):
+   polys : integer polynomials Q_j (coefficients highest degree first)
+   b     : rationals b_j >= 0 ("p/q"), one per polynomial
+   nodes : rationals 0 <= e_0 < e_1 < ... < e_N
+   G     : rationals G_0..G_N >= 0, G_0 = G_N = 0 (values of a continuous piecewise-linear density at the nodes)
+   X     : rational > 4 with e_N <= X  (Sigma = [0, X] has capacity X/4 > 1)
+-  v     : rational (claim: log lambda+ <= v and log E+ <= v)
++  v     : rational (claim: log lambda_A+ <= v and log E_A+ <= v)
+ Definitions (rebuilt from scratch): mu = G(x) dx, s = mu(R), U(x) = int log|x - y| G(y) dy = sum_i C_i H(e_i - x) with exact slope
+ jumps C_i, H(t) = t^2/2 log|t| - 3t^2/4, h(x) = U(x) - sum_j b_j log|Q_j(x)|.
+ VERIFIED means: (D) data: integer polynomials, each primitive and irreducible over Q, pairwise distinct; b_j >= 0; nodes increasing, G >= 0, G_0 = G_N = 0, s > 0; X > 4, e_N <= X;
+@@ -17,7 +18,7 @@
+ complex root z, U(z) = Re sum_i C_i Hc(e_i - z), Hc(t) = t^2/2 Log t - 3t^2/4: the branch terms cancel since sum C_i e_i^2 is real);
+ (U3) h(x) >= 0 for all x in [e_0, e_N] (root windows around roots of the Q_j with b_j > 0, chord bound
+ h >= min(h(p), h(q)) - (len/4) int_p^q (h'')_+ elsewhere, h'' = sum_i C_i log|e_i - x| + sum_j b_j sum_rho Re 1/(x - rho)^2);
+-(V) (1/s) int log+ x dmu(x) <= v (closed form, arb).  Then Lemma U1 gives lambda+ <= e^v and E+ <= e^v.
++(V) (1/s) int g(x) dmu(x) <= v (closed form, arb).  Then Lemma UA1 gives lambda_A+ <= e^v and E_A+ <= e^v.
+ 
+ How (U3) is proved on the WHOLE interval [e_0, e_N] (no sampling; the LP's grids play no role in the verdict):
+  * Only [e_0, e_N] is needed: h is superharmonic off it and tends to +inf at infinity by (U1), so h >= 0 there gives h >= 0 on C
+@@ -39,7 +40,7 @@
+  * Negative control "narrow dip" (make_dip_up.py): a tent of mass ~1.4e-7 and width 4e-6 placed strictly between two points of the
+    LP's 2e-5 check grid keeps h > 0 at every check-grid point and at the tent's nodes but makes h < 0 inside (x0, x0 + 3w); this
+    checker rejects it by the bisection above (FAILED near x0, endpoint value -4.8e-9).
+-Usage: check_up.py CERT.json [NPROC]
++Usage: check_arl_up.py CERT.json [NPROC]
+ """
+ import json, sys, math, time
+ from fractions import Fraction as Fr
+@@ -140,7 +141,7 @@
+ class Cert:
+     def __init__(self, path):
+         d = json.load(open(path))
+-        require(d.get('format') == 'tpmahler-upper-v1', "unknown format")
++        require(d.get('format') == 'tpmahler-areal-upper-v1', "unknown format")
+         require(all(isinstance(a, int) for q in d['polys'] for a in q), "non-integer coefficient")
+         self.polys = [[int(a) for a in q] for q in d['polys']]
+         self.b = [Fr(x) for x in d['b']]
+@@ -232,20 +233,25 @@
+ 
+ 
+ def int_logplus(cert):
+-    """int log+ x G(x) dx, closed form on each piece (G linear): int (alpha + beta x) log x dx with
+-    F1 = x log x - x, F2 = x^2/2 log x - x^2/4."""
++    """int g(x) G(x) dx, g = log+ x + (min(1, x)^2 - 1)/2, closed form on each piece (G = alpha + beta x):
++    on [a, min(b, 1)]: g = (x^2 - 1)/2, exact rational antiderivative alpha (x^3/6 - x/2) + beta (x^4/8 - x^2/4);
++    on [max(a, 1), b]: g = log x, F1 = x log x - x, F2 = x^2/2 log x - x^2/4 (as for log+)."""
+     tot = arb(0)
++    exact = Fr(0)
+     for k in range(len(cert.e) - 1):
+         a_, b_ = cert.e[k], cert.e[k + 1]
+-        if b_ <= 1:
+-            continue
+-        lo = max(a_, Fr(1))
+         beta = (cert.G[k + 1] - cert.G[k])/(b_ - a_)
+         alpha = cert.G[k] - beta*a_
+-        def F1(x): xa = A(x); return xa*xa.log() - xa
+-        def F2(x): xa = A(x); return xa*xa/2*xa.log() - xa*xa/4
+-        tot += A(alpha)*(F1(b_) - F1(lo)) + A(beta)*(F2(b_) - F2(lo))
+-    return tot
++        if a_ < 1:
++            hi = min(b_, Fr(1))
++            P = lambda x: alpha*(x**3/6 - x/2) + beta*(x**4/8 - x**2/4)
++            exact += P(hi) - P(a_)
++        if b_ > 1:
++            lo = max(a_, Fr(1))
++            def F1(x): xa = A(x); return xa*xa.log() - xa
++            def F2(x): xa = A(x); return xa*xa/2*xa.log() - xa*xa/4
++            tot += A(alpha)*(F1(b_) - F1(lo)) + A(beta)*(F2(b_) - F2(lo))
++    return tot + A(exact)
+ 
+ 
+ def h_exact(cert, xf):
+@@ -453,8 +459,8 @@
+         worst = val if worst is None or val.lower() < worst.lower() else worst
+     print(f"(U2) int log|Q_j| dmu > 0 for all {len(cert.active)} active Q_j; smallest {float(worst.lower()):.3e}")
+     VL = int_logplus(cert)/A(cert.s)
+-    require(arb_to_fr(VL.upper()) <= cert.v, "(V) claim v below (1/s) int log+ dmu")        # exact dyadic upper end <= v
+-    print(f"(V) (1/s) int log+ dmu = {VL} <= v  OK")
++    require(arb_to_fr(VL.upper()) <= cert.v, "(V) claim v below (1/s) int g dmu")        # exact dyadic upper end <= v
++    print(f"(V) (1/s) int g dmu = {VL} <= v  OK")
+     wins = windows_for(cert)
+     print(f"root windows: {len(wins)}  ({time.time() - t0:.0f}s)")
+     pts = set([cert.lo, cert.hi]) | set(cert.e)
+@@ -482,7 +488,7 @@
+         print(f"NOT VERIFIED ({len(bad)} failed; {time.time() - t0:.0f}s)")
+         sys.exit(1)
+     E = A(cert.v).exp()
+-    print(f"VERIFIED: log lambda+ <= v = {cert.v} <= {up_decimal(A(cert.v), 10)}; lambda+ <= e^v <= {up_decimal(E, 7)} (also E+)  "
++    print(f"VERIFIED: log lambda_A+ <= v = {cert.v} <= {up_decimal(A(cert.v), 10)}; lambda_A+ <= e^v <= {up_decimal(E, 7)} (also E_A+)  "
+           f"({time.time() - t0:.0f}s)")
+     sys.exit(0)
+ 

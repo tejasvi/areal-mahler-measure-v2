@@ -1,0 +1,10 @@
+../release_arl_audit/controls/lower_hidden/notch_B_logside_x3.1625.json: tpmahler-areal-lower-v1, 28 polynomials (28 weighted), 2005 nodes on [0.0, 20.0], s = 0.08173021646468465
+moments exact: True; data errors: none
+budget sum c deg + 2s = 0.902470881771 < 1: True; kappa = 0.0975291182
+energy I = [-1.80628874584e-8 +/- 2.06e-20]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.54691 +/- 2.65e-6]: True
+right tail [4897, inf): F >= [0.195065 +/- 3.73e-7] (increasing): True
+F >= 0 on the main range [0.001, 4897.0]: 10446 interval tests, coverage exact: True, failures: 1, brackets 189, smallest certified lower bound 4.0362e-08 near 3.162625333333333  [180s]
+   FAILED near (3.1625003333333335, 'value [-4.6649e-8 +/- 2.17e-13] < 0')
+NOT VERIFIED
+[194s]

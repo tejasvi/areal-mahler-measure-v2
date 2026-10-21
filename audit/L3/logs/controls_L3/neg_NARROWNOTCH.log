@@ -1,0 +1,10 @@
+lower/negative_controls/neg_NARROWNOTCH.json: tpmahler-areal-lower-v1, 34 polynomials (34 weighted), 4663 nodes on [0.0, 24.0], s = 0.0955757819960068
+moments exact: True; data errors: none
+budget sum c deg + 2s = 0.903938249102 < 1: True; kappa = 0.0960617509
+energy I = [1.59788492408e-8 +/- 4.42e-20]
+left tail (0, 1/1000] (support of G starts at 0.13): F >= [1.53243 +/- 1.44e-6]: True
+right tail [4357, inf): F >= [0.192147 +/- 3.95e-7] (increasing): True
+F >= 0 on the main range [0.001, 4357.0]: 58992 interval tests, coverage exact: True, failures: 1, brackets 230, smallest certified lower bound 6.2700e-09 near 0.245159875  [738s]
+   FAILED near (0.245160375, 'value [-7.9155e-9 +/- 2.63e-14] < 0')
+NOT VERIFIED
+[773s]

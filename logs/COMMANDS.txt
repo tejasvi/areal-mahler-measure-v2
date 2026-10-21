@@ -1,0 +1,37 @@
+Commands for the files in this directory. Paths are relative to the repository root.
+
+Running the checkers (Python 3 with python-flint; we used Python 3.12.13 and python-flint 0.9.0). The last argument, NPROC, is
+the number of worker processes. Both checkers refuse to run under python -O.
+    python3 -I checker/lower/check_arl_lo_59a1c54c.py certificate/lower/cert_arllo_L3_5295faaa.json NPROC
+    python3 -I checker/upper/check_arl_up_a17af685.py certificate/upper/cert_arlup_U2_cb2c7960.json NPROC
+
+lower/check_arllo_L3_5295faaa.log was produced on a 96-thread server by the lower checker with 48 worker processes; the checker
+and the certificate were then named check_arl_lo.py and cert_arllo_L3.json:
+    nice -n 10 python3 -I check_arl_lo.py cert_arllo_L3.json 48 > check_arllo_L3.log 2>&1; echo "exit=$?" >> check_arllo_L3.log
+i.e., in this tree,
+    python3 -I checker/lower/check_arl_lo_59a1c54c.py certificate/lower/cert_arllo_L3_5295faaa.json 48
+upper/check_arlup_U2_cb2c7960.log was produced on the same server by the upper checker with 40 worker processes; the checker and
+the certificate were then named check_arl_up.py and cert_arlup_U2.json:
+    nice -n 10 python3 -I check_arl_up.py cert_arlup_U2.json 40 > check_arlup_U2.log 2>&1; echo "exit=$?" >> check_arlup_U2.log
+i.e., in this tree,
+    python3 -I checker/upper/check_arl_up_a17af685.py certificate/upper/cert_arlup_U2_cb2c7960.json 40
+The logs do not repeat the commands. Their last line, exit=0, is the exit status, appended after the run.
+
+lower/summary_cert_arllo_L3_5295faaa.txt and upper/summary_cert_arlup_U2_cb2c7960.txt list the polynomials of each certificate
+by their row numbers in Flammang's Table 2. They are the output of
+    python3 -I search/cert_summary_arl.py certificate/lower/cert_arllo_L3_5295faaa.json table2/flammang2015_table2_image_transcription_8720412f.json
+    python3 -I search/cert_summary_arl.py certificate/upper/cert_arlup_U2_cb2c7960.json table2/flammang2015_table2_image_transcription_8720412f.json
+except that their first lines give the certificate paths as lower/... and upper/..., the directories in which they were made.
+
+lower/diag_L3.py and lower/diag_L3.log are a diagnostic, not part of the proof, for the run time of the lower check (3665 s
+with 48 worker processes). diag_L3.py repeats the checker's setup and bisects each chord interval with the checker's interval
+test, at most CAP checks per interval; it lists the intervals that fail, reach the cap or need more than 200 checks. It
+imports the checker from checker/lower/. diag_L3.log was produced on the same server with 80 worker processes and CAP = 400
+(the certificate then named cert_arllo_L3.json), i.e., in this tree,
+    python3 -I logs/lower/diag_L3.py certificate/lower/cert_arllo_L3_5295faaa.json 80 400
+Only the last chord interval, [24, 4357], reaches the cap; with the cap, the 4790 intervals took 26,705 checks, 400 of them
+on [24, 4357]. So the other 4789 intervals take 26,305 checks, and the remaining 42,993 of the 69,298 checks of the logged
+run of the checker fall on [24, 4357], all in one worker process.
+
+A rerun of the upper checker on these files on another, shared server (python3 -I -B, 24 worker processes) printed the same
+lines as upper/check_arlup_U2_cb2c7960.log except for the run times (28 s in total).

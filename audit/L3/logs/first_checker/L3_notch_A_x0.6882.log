@@ -1,0 +1,13 @@
+polys 34 (active 34), nodes 4664, s = 0.09557578, m = 0.3242647675
+budget sum c deg + 2 s = 0.903938 < 1  OK;  I = [1.304155414157205342793910795840976304436e-8 +/- 7.05e-48]
+left tail (0, x_lo]: True 1.5324318039797706
+right tail [x_hi, inf): True 0.19214738156289143 kappa 0.09606175305801623
+root windows: 230  (122s)
+chord intervals: 4801
+interval checks: 129654; smallest endpoint lower bound 9.5122e-09
+  FAILED near x = 0.688204: lower -7.467e-08 at ('193712580172149/281474976710656', '2064619/3000000')
+NOT VERIFIED (1 failed; 5775s)
+
+real	96m15.377s
+user	148m13.506s
+sys	0m0.174s

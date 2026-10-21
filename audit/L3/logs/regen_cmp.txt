@@ -1,0 +1,2 @@
+lower_hidden/L3_notch_A_x0.6882.json identical
+lower_hidden/L3_notch_B_x3.4834.json identical

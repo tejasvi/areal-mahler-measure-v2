@@ -1,0 +1,28 @@
+upper/negative_controls/neg_OPEN_coeff_x2m3xp1_to_x2m3xm1.json: tpmahler-areal-upper-v1, 23 polynomials (23 weighted), 3170 nodes on [0.155, 16.0], s = 1.0000000000000016
+moments exact: True; data errors: none
+(U1) sum b deg = 0.9395242426 < s = 1.0000000000: True
+(U2) all weighted: True; smallest int log|Q| dmu = 1.0000e-07 (Q_1)
+(V) (1/s) int g dmu = [0.325189754087824 +/- 4.64e-16] (exact rational part -0.230824436542); claim v = 0.325189755077; margin 9.892e-10: True
+(U3) [0.155, 16.0]: 3544 interval tests, coverage exact: True, failures: 459, brackets 137, smallest certified lower bound -7.9933e-02 near 0.3491727147540387  [13s]
+   FAILED near (0.1575, 'value [-0.016105 +/- 3.93e-7] < 0')
+   FAILED near (0.1625, 'value [-0.036042 +/- 1.00e-7] < 0')
+   FAILED near (0.16738856724795143, 'value [-0.037263 +/- 2.71e-7] < 0')
+   FAILED near (0.1698885672479514, 'value [-0.029497 +/- 3.77e-7] < 0')
+   FAILED near (0.17240317496941007, 'value [-0.038278 +/- 3.51e-7] < 0')
+   FAILED near (0.17490317496941007, 'value [-0.017170 +/- 4.98e-7] < 0')
+   FAILED near (0.1775, 'value [-0.039488 +/- 7.26e-8] < 0')
+   FAILED near (0.1825, 'value [-0.041083 +/- 2.37e-7] < 0')
+   FAILED near (0.18530645855371686, 'value [-0.033721 +/- 2.41e-8] < 0')
+   FAILED near (0.18780645855371686, 'value [-0.042413 +/- 3.51e-7] < 0')
+   FAILED near (0.19052144749082778, 'value [-0.034268 +/- 3.00e-8] < 0')
+   FAILED near (0.19178404470552493, 'value [-0.036123 +/- 2.00e-7] < 0')
+   FAILED near (0.19252519442939428, 'bracket of Q_[21]')
+   FAILED near (0.19376259721469716, 'value [-0.043452 +/- 8.70e-8] < 0')
+   FAILED near (0.19675082425081838, 'value [-0.043693 +/- 2.65e-7] < 0')
+   FAILED near (0.1992508242508184, 'value [-0.041441 +/- 4.54e-7] < 0')
+   FAILED near (0.20018064228806487, 'value [-0.044478 +/- 1.56e-7] < 0')
+   FAILED near (0.20036128457612973, 'bracket of Q_[18]')
+   FAILED near (0.20268064228806487, 'value [-0.046540 +/- 2.04e-7] < 0')
+   FAILED near (0.20596269073504794, 'value [-0.046414 +/- 2.30e-8] < 0')
+NOT VERIFIED
+[17s]

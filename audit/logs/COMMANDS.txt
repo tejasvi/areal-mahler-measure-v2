@@ -1,0 +1,26 @@
+# Commands that produced the logs in this directory. Working directory: a directory containing the certificate release's
+#   lower/cert_arllo_L1_4c5758a0.json, upper/cert_arlup_U2_cb2c7960.json, lower/negative_controls/*.json (16) and
+#   upper/negative_controls/*.json (18), with this release directory at P=../release_arl_audit and a scratch directory
+#   G=../regen. PY = "python3 -I" (Python 3.13.5, python-flint 0.9.0); 16 processes per checker run on a shared machine.
+P=../release_arl_audit; L=$P/logs; G=../regen
+L1=lower/cert_arllo_L1_4c5758a0.json; U2=upper/cert_arlup_U2_cb2c7960.json
+$PY $P/check_arl_second.py $L1 16 > $L/check_second_L1.log
+$PY $P/check_arl_second.py $U2 16 > $L/check_second_U2.log
+for f in lower/negative_controls/*.json; do $PY $P/check_arl_second.py $f 16 > $L/controls_L1/$(basename $f .json).log; done
+for f in upper/negative_controls/*.json; do $PY $P/check_arl_second.py $f 16 > $L/controls_U2/$(basename $f .json).log; done
+for f in $P/controls/lower_hidden/*.json; do $PY $P/check_arl_second.py $f 16 > $L/controls_L1/own_$(basename $f .json).log; done
+for f in $P/controls/upper_hidden/*.json; do $PY $P/check_arl_second.py $f 16 > $L/controls_U2/own_$(basename $f .json).log; done
+# exit statuses: exit_codes.txt, controls_L1/exit_codes.txt, controls_U2/exit_codes.txt
+$PY $P/validate_arl.py $L1 300 1 > $L/validate_arl_L1.log
+$PY $P/validate_arl.py $U2 300 2 > $L/validate_arl_U2.log
+$PY $P/scan_contacts.py $L1 > $L/scan_contacts_L1.log
+$PY $P/scan_contacts.py $U2 > $L/scan_contacts_U2.log
+$PY $P/make_hidden_notch.py $L1 667531 3000000 1 1000000 1 2000000 $G/lower_hidden/notch_A_hidden_x0.2225.json grid > $L/make_hidden_notch_A.log
+$PY $P/make_hidden_notch.py $L1 9487501 3000000 1 10000 1 20000 $G/lower_hidden/notch_B_logside_x3.1625.json > $L/make_hidden_notch_B.log
+$PY $P/make_hidden_dips.py $U2 1147 160 427 $G/upper_hidden > $L/make_hidden_dips_U2.log
+(cd $P/controls && for f in */*.json; do cmp -s $f ../../regen/$f && echo "$f identical" || echo "$f DIFFERS"; done) > $L/regen_cmp.txt
+# first checkers on the own controls (first_checker/), each with python-flint 0.9.0; the output of the bash builtin
+# `time` ends each log:
+#   python3 -I check_arl_lo_59a1c54c.py FILE 96   (notch_A, notch_B; Python 3.13.5)
+#   python3 -I check_arl_up_a17af685.py FILE 16   (hidden_up_A_contact; Python 3.12.13)
+#   python3 -I check_arl_up_a17af685.py FILE 96   (hidden_up_B_nearnode; Python 3.13.5)

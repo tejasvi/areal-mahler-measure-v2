@@ -1,0 +1,74 @@
+Exact command lines of the search (redacted). The L1 and U2 lines are those of the release/COMMANDS.txt of the frozen
+package of the L1 and U2 certificates; the L3 lines are those recorded in the frozen package of the L3 certificate (its
+NOTE.txt, which writes the interpreter as python, here $PY, and its wrapper scripts).
+Redacted: the name of the server, the working directory and the path of the Python interpreter. The commands are otherwise
+unchanged. They were run in one working directory that held all programs under their import names (NAME.py). The search
+programs are the files of this directory (search/), with their absolute paths replaced by paths relative to the program's own
+directory; the other files are listed below. PY is a Python 3.12.13 interpreter with numpy 2.5.4, scipy 1.18.1 (HiGHS),
+cvxpy 1.9.3, clarabel 0.11.1 and python-flint 0.9.0.
+The wrapper shell scripts named below (chain_L3.sh, chain_U2.sh, run_ctrl_L1.sh, run_ctrl_U2.sh, run_dips.sh, run_notch.sh,
+run_ctrl_L3b.sh, run_ctrl_L3.sh) are omitted; each entry says what the script ran.
+Names used below and the files of this release:
+  primal_L1.npy, primal_L1.log                    = lp/primal_L1_56b810dd.npy, lp/primal_L1_7a849ec8.log
+  arldual_L1.log                                  = lp/arldual_L1_727ad8d7.log
+  primal_L1_arldualN_A58.npy, _idx.json           = lp/primal_L1_arldualN_A58_ba0fdb83.npy, lp/primal_L1_arldualN_A58_idx_80c4e31d.json
+  nodes_L3.npy                                    = lp/nodes_L3_5c1e203f.npy
+  primal_L3.npy, primal_L3.log                    = lp/primal_L3_7cd5ed67.npy, lp/primal_L3_865bbf1d.log
+  arldual_L3.log                                  = lp/arldual_L3_e5fbddc1.log
+  primal_L3_arldualN_A58v.npy, _idx.json          = lp/primal_L3_arldualN_A58v_daa030e9.npy, lp/primal_L3_arldualN_A58v_idx_80c4e31d.json
+  export_arllo_L3.log                             = lp/export_arllo_L3_eb30aab1.log
+  arlup_U2.npy, arlup_U2.json, arlup_U2.log       = lp/arlup_U2_288a23da.npy, lp/arlup_U2_aba8a2b7.json, lp/arlup_U2_c594babf.log
+  export_arlup_U2.log                             = lp/export_arlup_U2_88c071a4.log
+  cert_arllo_L3.json, cert_arlup_U2.json          = ../certificate/lower/cert_arllo_L3_5295faaa.json, ../certificate/upper/cert_arlup_U2_cb2c7960.json
+  check_arl_lo.py, check_arl_up.py                = ../checker/lower/check_arl_lo_59a1c54c.py, ../checker/upper/check_arl_up_a17af685.py
+  check_arllo_L3.log, check_arlup_U2.log          = ../logs/lower/check_arllo_L3_5295faaa.log, ../logs/upper/check_arlup_U2_cb2c7960.log
+  make_neg_arl.py, make_neg2_arl.py, make_dip_arl_lo.py = ../controls/lower/make_neg_arl_cc13d65b.py, make_neg2_arl_f9b01813.py, make_dip_arl_lo_b3fcc5a9.py
+  make_neg_up_arl.py, make_dip_arl_up.py          = ../controls/upper/make_neg_up_arl_12633fe2.py, make_dip_arl_up_be1590a6.py
+  ctrl_L3/, ctrl_U2/                              = ../controls/lower/, ../controls/upper/
+  cert_arllo_L1.json, check_arllo_L1.log, ctrl_L1/: the L1 certificate, its check log and its controls; not in this release
+                                                  (L1 is the first stage of the L3 search: arl_nodes.py uses the L1 dual).
+
+L1 (lower, first stage):
+  OMP_NUM_THREADS=16 nice -n 10 $PY -I arl_primal.py A58 uniform:20:0.01 L1 > primal_L1.log            -> primal_L1.npy
+  TP_NPROC=40 nice -n 10 $PY -I arl_dual.py primal_L1.npy A58 > arldual_L1.log                         -> primal_L1_arldualN_A58.npy, _idx.json
+  nice -n 10 $PY -I export_arl_lo.py primal_L1.npy primal_L1_arldualN_A58.npy A58 3e-6 cert_arllo_L1.json
+  nice -n 10 $PY -I check_arl_lo.py cert_arllo_L1.json 60 > check_arllo_L1.log
+L3 (lower; adaptive nodes from the L1 dual):
+  $PY -I arl_nodes.py A58 primal_L1_arldualN_A58.npy 24 0.01 0.0005 0.004 nodes_L3.npy                 -> nodes_L3.npy
+  OMP_NUM_THREADS=16 $PY -I arl_primal.py A58 nodes_L3.npy L3 > primal_L3.log                          -> primal_L3.npy
+  TP_NPROC=40 $PY -I arl_dual.py primal_L3.npy A58v > arldual_L3.log                                   -> primal_L3_arldualN_A58v.npy, _idx.json
+  chain_L3.sh: export_arl_lo.py primal_L3.npy primal_L3_arldualN_A58v.npy A58v 3e-6 cert_arllo_L3.json > export_arllo_L3.log;
+               check_arl_lo.py cert_arllo_L3.json 48 > check_arllo_L3.log
+U2 (upper):
+  nice -n 10 $PY -I arl_upper.py A58 uniform:16:0.005 0.004 U2 3e-6 2e-5 16 sparse highs-ds > arlup_U2.log   -> arlup_U2.npy, arlup_U2.json
+  chain_U2.sh: export_arl_up.py arlup_U2.npy A58 1e-9 cert_arlup_U2.json > export_arlup_U2.log;
+               check_arl_up.py cert_arlup_U2.json 40 > check_arlup_U2.log
+Controls:
+  run_ctrl_L1.sh: make_neg_arl.py + make_neg2_arl.py cert_arllo_L1.json ctrl_L1; check_arl_lo.py neg_*.json 10 (6 in parallel)
+  run_ctrl_U2.sh: make_neg_up_arl.py cert_arlup_U2.json ctrl_U2; make_dip_arl_up.py cert_arlup_U2.json ctrl_U2/neg_NARROWDIP.json;
+                  check_arl_up.py neg_*.json 20 (4 in parallel)
+  run_dips.sh: make_dip_arl_up.py (again, same output) + check_arl_up.py ctrl_U2/neg_NARROWDIP.json 30;
+               make_dip_arl_lo.py cert_arllo_L1.json ctrl_L1/neg_NARROWNOTCH.json 23275/100000 (W = 1e-6, the default when
+               this process started) + check_arl_lo.py ctrl_L1/neg_NARROWNOTCH.json 30
+  run_notch.sh: a second notch run with W = 3e-6; stopped before it ran (it waited on another process), so it produced
+                nothing that is in this release.
+  run_ctrl_L3b.sh: make_neg_arl.py + make_neg2_arl.py cert_arllo_L3.json ctrl_L3; make_dip_arl_lo.py cert_arllo_L3.json
+                   ctrl_L3/neg_NARROWNOTCH.json 6129/25000 1/1000000; check_arl_lo.py neg_m_plus_*.json neg_NARROWNOTCH.json 8
+                   (4 in parallel) and, at the same time, check_arl_lo.py with each other neg_*.json 2 (4 in parallel)
+  run_ctrl_L3.sh: a first version of run_ctrl_L3b.sh that waited for the L3 check; stopped before it ran anything.
+Export reproduction at freeze time: REPRO_EXPORT.txt. Control regeneration: ../controls/REGEN.txt.
+
+Polynomial sets (data/; tpsets.load(NAME) reads data/NAME.json):
+  data/A58.json  = release/A58_9f9223d2.json of the frozen packages: the text (pdftotext) transcription of Flammang's Table 2,
+                   58 rows, whose row 58 is wrong (two stray footer fragments: ..., 1001, -80, 3 instead of the printed
+                   ..., 591, -36, 1). Set A58 is the one used above for the L1 runs, arl_nodes.py, the L3 primal and the
+                   U2 runs; row 58 has weight 0 in the L1 and U2 certificates.
+  data/A58v.json = release/A58v_961553a5.json of the frozen packages: the verified set (image transcription, ../table2/); rows
+                   1-57 as in A58, row 58 as printed. Set A58v is the one used for the L3 dual and the L3 export; row 58 has
+                   weight 0 in the L3 dual, so it is not among the 34 polynomials of the L3 certificate.
+
+Reproducing the certificates from lp/ (run in this directory; each output is byte-identical to its certificate; the first
+line makes the L1 certificate of the first stage, sha256 4c5758a01151acbd31d0193517137a230b152539e43ce1337c869eb1f5c150ef):
+  $PY -I export_arl_lo.py lp/primal_L1_56b810dd.npy lp/primal_L1_arldualN_A58_ba0fdb83.npy A58 3e-6 cert_arllo_L1.json
+  $PY -I export_arl_up.py lp/arlup_U2_288a23da.npy A58 1e-9 cert_arlup_U2.json
+  $PY -I export_arl_lo.py lp/primal_L3_7cd5ed67.npy lp/primal_L3_arldualN_A58v_daa030e9.npy A58v 3e-6 cert_arllo_L3.json
